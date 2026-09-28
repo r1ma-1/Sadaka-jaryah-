@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6f4a2f">
+<title>صدقة جارية | عبدالرحيم صبري عبدالرحيم حسنين</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap');
+
+:root{
+ --espresso:#352318;
+ --brown:#5b3b26;
+ --brown2:#765238;
+ --beige:#efe3cf;
+ --ivory:#fffaf1;
+ --sand:#e3d2b4;
+ --gold:#b8955d;
+ --gold-light:#d9bd88;
+ --muted:#7d6b59;
+ --line:#dcc9a9;
+ --shadow:0 18px 55px rgba(53,35,24,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;color:var(--espresso);font-family:Cairo,Arial,sans-serif;
+ background:#efe3cf;
+}
+button,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(1060px,calc(100% - 32px));margin:auto}
+
+/* ================= HOME ================= */
+.home{
+ min-height:100svh;display:flex;align-items:center;justify-content:center;
+ position:relative;overflow:hidden;color:#fff;
+ background:
+ linear-gradient(rgba(53,35,24,.91),rgba(91,59,38,.94)),
+ radial-gradient(circle at 50% 30%,#a77c4b,transparent 40%);
+}
+.home::before{
+ content:"";position:absolute;width:min(760px,95vw);height:min(760px,95vw);
+ border:1px solid rgba(217,189,136,.25);border-radius:50%;
+}
+.home::after{
+ content:"";position:absolute;width:min(570px,74vw);height:min(570px,74vw);
+ border:1px solid rgba(217,189,136,.17);border-radius:50%;
+}
+.home-inner{position:relative;z-index:2;text-align:center;padding:45px 12px}
+.bismillah{font:400 25px Amiri,serif;color:#e1c99d;margin-bottom:32px}
+.kicker{font-size:10px;letter-spacing:4px;color:#d5b87f;font-weight:700}
+.name{
+ font:700 clamp(48px,8vw,82px)/1.15 "Scheherazade New",Amiri,serif;
+ margin:18px 0 20px;color:#fff;
+}
+.ayah{font:400 clamp(21px,3vw,29px)/2 Amiri,serif;color:#f7eddb;margin:0 auto}
+.ayah-source{font-size:11px;color:#d8c3a0;margin:5px 0 25px}
+.dua-line{
+ display:inline-block;padding:10px 28px;border-top:1px solid #d9bd8866;
+ border-bottom:1px solid #d9bd8866;font:400 20px Amiri,serif;color:#e6d4b5
+}
+.home-menu{
+ margin:34px auto 0;border:1px solid #d9bd8870;background:#f9f0df;
+ color:var(--espresso);border-radius:13px;padding:13px 34px;font-weight:700;
+ box-shadow:0 12px 30px rgba(0,0,0,.20);transition:.18s
+}
+.home-menu:hover{transform:translateY(-2px)}
+.stats{display:flex;justify-content:center;gap:10px;margin-top:24px}
+.stat{
+ min-width:170px;padding:10px 18px;border:1px solid #d9bd8840;
+ background:#fff9ed0e;border-radius:13px
+}
+.stat-label{font-size:10px;color:#d8c5a7}
+.stat-number{font-size:24px;color:#fff;font-weight:700}
+
+/* ================= MENU OVERLAY ================= */
+.menu-overlay{
+ position:fixed;inset:0;background:rgba(32,20,13,.70);
+ backdrop-filter:blur(8px);z-index:200;
+ opacity:0;visibility:hidden;transition:.2s;
+}
+.menu-overlay.open{opacity:1;visibility:visible}
+.menu-card{
+ position:absolute;right:50%;top:50%;transform:translate(50%,-46%);
+ width:min(520px,calc(100% - 30px));max-height:90svh;overflow:auto;
+ background:linear-gradient(145deg,#fffaf1,#eee0c7);
+ border:1px solid var(--line);border-radius:28px;padding:28px;
+ box-shadow:0 30px 90px rgba(0,0,0,.28);
+ transition:.25s;
+}
+.menu-overlay.open .menu-card{transform:translate(50%,-50%)}
+.menu-heading{
+ display:flex;align-items:center;justify-content:space-between;
+ padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line)
+}
+.menu-heading h2{font:700 36px/1 "Scheherazade New",Amiri,serif;margin:0;color:var(--brown)}
+.close-menu{
+ border:1px solid var(--line);background:var(--ivory);color:var(--brown);
+ width:40px;height:40px;border-radius:12px;font-size:22px
+}
+.menu-items{display:grid;gap:10px}
+.menu-item{
+ width:100%;text-align:right;border:1px solid var(--line);
+ background:rgba(255,250,241,.88);border-radius:17px;
+ padding:16px 19px;color:var(--espresso);transition:.18s
+}
+.menu-item:hover{background:#f8edda;border-color:var(--gold-light);transform:translateY(-1px)}
+.menu-item strong{display:block;font:700 28px/1.2 "Scheherazade New",Amiri,serif;color:var(--brown)}
+.menu-item span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+
+/* ================= SINGLE-PAGE APP ================= */
+.app{display:none;min-height:100svh;background:linear-gradient(135deg,#efe3cf,#f6eddf)}
+.app.active{display:block}
+.app-header{
+ position:sticky;top:0;z-index:100;background:#fffaf1eb;
+ backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
+}
+.app-header-inner{height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font:700 27px "Scheherazade New",Amiri,serif;color:var(--brown)}
+.header-btn{
+ border:1px solid var(--line);background:var(--ivory);color:var(--brown);
+ border-radius:11px;padding:8px 14px;font-weight:700
+}
+
+/* CRITICAL: only the selected view is displayed */
+.view{display:none !important}
+.view.active{display:block !important}
+
+.section{padding:58px 0 70px}
+.section-head{text-align:center;margin-bottom:30px}
+.eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:700}
+.title{font:700 clamp(42px,7vw,60px)/1.1 "Scheherazade New",Amiri,serif;color:var(--brown);margin:7px 0}
+.desc{max-width:720px;margin:auto;color:var(--muted);font-size:13px;line-height:2}
+.panel{background:rgba(255,250,241,.88);border:1px solid var(--line);border-radius:27px;box-shadow:var(--shadow)}
+
+/* ================= AZKAR ================= */
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:18px}
+.tab{
+ border:1px solid var(--line);background:var(--ivory);color:var(--brown);
+ padding:10px 25px;border-radius:12px;font-weight:700
+}
+.tab.active{background:var(--brown);color:#fff}
+.azkar-list{display:grid;gap:14px}
+.zekr{padding:21px;border:1px solid var(--line);border-radius:21px;background:var(--ivory)}
+.zekr-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.zekr-title{font-size:14px;font-weight:700;color:var(--brown)}
+.repeat{font-size:11px;color:var(--brown);background:#f0e2ca;border:1px solid var(--line);padding:5px 10px;border-radius:99px;white-space:nowrap}
+.zekr-text{font:400 24px/2.15 Amiri,serif;margin:14px 0;color:#38271c}
+.benefit{font-size:11px;line-height:1.9;color:#796854;background:#f4e9d7;border-right:3px solid var(--gold);padding:8px 12px;border-radius:8px}
+.zekr-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:13px}
+.zekr-count{font-size:11px;color:var(--muted)}
+.zekr-btn{border:0;background:var(--brown);color:#fff;border-radius:11px;padding:10px 18px;font-weight:700}
+.zekr-btn.done{background:#967b55}
+.zekr-source{font-size:10px;color:#9b8976;margin-top:9px}
+
+/* ================= QURAN ================= */
+.quran-box{padding:15px;background:#e4d3b5;border:1px solid #d0b98e;border-radius:27px}
+.quran-controls{display:grid;grid-template-columns:1fr auto auto;gap:8px}
+.select{border:1px solid #d4c09d;background:var(--ivory);color:var(--brown);padding:12px;border-radius:12px;outline:none}
+.action{border:0;background:var(--brown);color:#fff;padding:12px 18px;border-radius:12px;font-weight:700}
+.action.light{background:var(--ivory);color:var(--brown);border:1px solid var(--line)}
+.mushaf{
+ margin-top:13px;background:var(--ivory);border:6px double #c6a364;
+ border-radius:18px;padding:25px 17px;min-height:380px
+}
+.surah-title{text-align:center;font:400 31px Amiri,serif;color:var(--brown);padding-bottom:14px;border-bottom:1px solid #decfb5}
+.ayah-q{font:400 24px/2.2 Amiri,serif;padding:11px 0;border-bottom:1px solid #eee3d3}
+.ayah-q:last-child{border-bottom:0}
+.ayah-num{
+ display:inline-grid;place-items:center;width:29px;height:29px;
+ border:1px solid var(--gold);border-radius:50%;font:400 10px Cairo,sans-serif;
+ color:#886a36;margin-left:7px
+}
+.status{text-align:center;color:var(--muted);font-size:12px;padding:30px 10px}
+audio{width:100%;margin-top:10px}
+
+/* ================= TASBEEH ================= */
+.tas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tas-card{padding:25px;text-align:center}
+.tas-name{font:400 25px Amiri,serif;color:var(--brown);min-height:43px}
+.tas-num{font-size:29px;font-weight:700;color:var(--brown);margin:5px 0}
+.tas-ring{
+ width:142px;height:142px;border-radius:50%;margin:14px auto;
+ background:radial-gradient(circle,#fffaf1 0 58%,#c5a66d 59% 63%,#6e4b31 64% 100%);
+ border:5px solid #b58a4d;display:grid;place-items:center;
+ box-shadow:0 14px 30px #5a3a2522;transition:.12s
+}
+.tas-ring:active{transform:scale(.96)}
+.tas-center{
+ width:91px;height:91px;border-radius:50%;background:var(--ivory);
+ border:1px solid var(--line);display:grid;place-items:center;
+ color:var(--brown);font-size:11px;font-weight:700
+}
+.reset{border:1px solid var(--line);background:transparent;color:var(--brown);border-radius:10px;padding:8px 13px;font-size:11px}
+
+/* ================= RADIO / DUA ================= */
+.radio{padding:32px;background:linear-gradient(145deg,#4a2e1e,#795337);color:#fff}
+.radio h3,.dua-main h3{font:700 42px/1.2 "Scheherazade New",Amiri,serif;margin:0 0 10px}
+.radio p{color:#e9dcc6;line-height:2;font-size:13px}
+.dua-main{padding:30px}
+.dua-main p{font:400 24px/2.15 Amiri,serif}
+.dua-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.dua-card{background:var(--ivory);border:1px solid var(--line);border-radius:18px;padding:19px;font:400 20px/2 Amiri,serif}
+
+@media(max-width:700px){
+ .container{width:calc(100% - 22px)}
+ .home-inner{padding-top:30px}
+ .name{font-size:53px}
+ .stats{gap:7px}
+ .stat{min-width:0;flex:1}
+ .menu-card{padding:22px}
+ .menu-heading h2{font-size:32px}
+ .section{padding:42px 0 60px}
+ .quran-controls{grid-template-columns:1fr}
+ .tas-grid{grid-template-columns:1fr}
+ .dua-list{grid-template-columns:1fr}
+ .zekr-text{font-size:22px}
+ .zekr-bottom{flex-direction:column;align-items:stretch}
+ .zekr-btn{width:100%}
+ .brand{font-size:23px}
+}
+</style>
+</head>
+<body>
+<!-- الصفحة الرئيسية فقط -->
+<section class="home" id="homeView">
+ <div class="home-inner container">
+  <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</div>
+  <div class="kicker">صَدَقَةٌ جَارِيَةٌ عَنْ رُوحِه</div>
+  <h1 class="name">عبدالرحيم صبري<br>عبدالرحيم حسنين</h1>
+  <p class="ayah">﴿ وَقُلْ رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ ﴾</p>
+  <div class="ayah-source">سورة المؤمنون — ١١٨</div>
+  <div class="dua-line">اللهم اغفر له وارحمه، واجعل قبره روضةً من رياض الجنة</div>
+  <div><button class="home-menu" id="openMenu">فتح الفهرس</button></div>
+  <div class="stats">
+   <div class="stat"><div class="stat-label">زوار اليوم</div><div class="stat-number" id="visits">—</div></div>
+   <div class="stat"><div class="stat-label">إجمالي مرات الذكر</div><div class="stat-number" id="dhikrTotal">—</div></div>
+  </div>
+ </div>
+</section>
+
+<!-- الفهرس: لا تظهر الأقسام تحته، بل يختار المستخدم قسمًا واحدًا -->
+<div class="menu-overlay" id="drawer" aria-hidden="true">
+ <div class="menu-card">
+  <div class="menu-heading">
+   <h2>فهرس الموقع</h2>
+   <button class="close-menu" id="closeMenu" aria-label="إغلاق">×</button>
+  </div>
+  <div class="menu-items">
+   <button class="menu-item" data-view="quranView"><strong>القرآن الكريم</strong><span>المصحف كاملًا مع التلاوة</span></button>
+   <button class="menu-item" data-view="adhkarView"><strong>الأذكار</strong><span>أذكار الصباح والمساء مع العدّ</span></button>
+   <button class="menu-item" data-view="tasbeehView"><strong>المسبحة الإلكترونية</strong><span>كل ذكر في عدّاد مستقل</span></button>
+   <button class="menu-item" data-view="radioView"><strong>إذاعة القرآن</strong><span>الاستماع إلى إذاعة القرآن الكريم</span></button>
+   <button class="menu-item" data-view="duaView"><strong>الدعاء له</strong><span>اللهم اغفر له وارحمه</span></button>
+  </div>
+ </div>
+</div>
+
+<!-- التطبيق: view واحدة فقط لها active -->
+<div class="app" id="app">
+ <header class="app-header">
+  <div class="app-header-inner container">
+   <button class="header-btn" id="backHome">الرئيسية</button>
+   <div class="brand">عبدالرحيم صبري عبدالرحيم حسنين</div>
+   <button class="header-btn" id="openMenu2">الفهرس</button>
+  </div>
+ </header>
+
+ <section class="view" id="quranView">
+  <div class="section"><div class="container">
+   <div class="section-head"><div class="eyebrow">المصحف الشريف</div><h2 class="title">القرآن الكريم كاملًا</h2><p class="desc">اختر سورة واحدة لعرضها وقراءتها والاستماع إلى تلاوتها.</p></div>
+   <div class="quran-box">
+    <div class="quran-controls">
+     <select class="select" id="surahSelect" aria-label="اختيار السورة"></select>
+     <button class="action" id="loadSurah">فتح السورة</button>
+     <button class="action light" id="playSurah">تشغيل</button>
+    </div>
+    <div class="mushaf" id="mushaf"><div class="status">اختر السورة ثم اضغط «فتح السورة».</div></div>
+    <audio id="quranAudio" controls preload="none"></audio>
+   </div>
+  </div></div>
+ </section>
+
+ <section class="view" id="adhkarView">
+  <div class="section"><div class="container">
+   <div class="section-head"><div class="eyebrow">حصن المسلم</div><h2 class="title">أذكار الصباح والمساء</h2><p class="desc">مع عدد التكرار وفضل مختصر لكل ذكر.</p></div>
+   <div class="tabs"><button class="tab active" id="morningTab">أذكار الصباح</button><button class="tab" id="eveningTab">أذكار المساء</button></div>
+   <div class="azkar-list" id="azkarList"></div>
+  </div></div>
+ </section>
+
+ <section class="view" id="tasbeehView">
+  <div class="section"><div class="container">
+   <div class="section-head"><div class="eyebrow">الذكر</div><h2 class="title">المسبحة الإلكترونية</h2><p class="desc">سبعة أذكار، ولكل ذكر عدّاد مستقل محفوظ على جهازك.</p></div>
+   <div class="tas-grid" id="tasGrid"></div>
+  </div></div>
+ </section>
+
+ <section class="view" id="radioView">
+  <div class="section"><div class="container">
+   <div class="section-head"><div class="eyebrow">بث القرآن</div><h2 class="title">إذاعة القرآن الكريم</h2></div>
+   <div class="radio panel">
+    <h3>إذاعة القرآن الكريم من القاهرة</h3>
+    <p>استمع إلى البث والبرامج الدينية عبر الموقع الرسمي للإذاعة.</p>
+    <a class="home-menu" href="https://misrquran.gov.eg/" target="_blank" rel="noopener">الاستماع إلى الإذاعة</a>
+   </div>
+  </div></div>
+ </section>
+
+ <section class="view" id="duaView">
+  <div class="section"><div class="container">
+   <div class="section-head"><div class="eyebrow">دعاء للميت</div><h2 class="title">اللهم اغفر له وارحمه</h2></div>
+   <div class="dua-main panel">
+    <h3>اللهم اغفر لعبدالرحيم صبري عبدالرحيم حسنين وارحمه</h3>
+    <p>اللهم اغفر له وارحمه، وعافه واعفُ عنه، وأكرم نزله، ووسّع مدخله، واغسله بالماء والثلج والبرد، ونقّه من الخطايا كما نقيت الثوب الأبيض من الدنس، وأبدله دارًا خيرًا من داره، وأهلًا خيرًا من أهله، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار.</p>
+    <div class="dua-list">
+     <div class="dua-card">اللهم آنس وحشته، وارحم غربته، ونوّر قبره، وافسح له فيه، واجعل قبره روضةً من رياض الجنة.</div>
+     <div class="dua-card">اللهم ارفع درجته في المهديين، واخلفه في عقبه في الغابرين، واغفر لنا وله يا رب العالمين.</div>
+     <div class="dua-card">اللهم اجعل القرآن نورًا له في قبره، واجعل ما يُقرأ هنا رحمةً وأجرًا جاريًا له.</div>
+     <div class="dua-card">اللهم اجمعنا به في جنات النعيم، واغفر لموتى المسلمين أجمعين.</div>
+    </div>
+   </div>
+  </div></div>
+ </section>
+</div>
+
+<script>
+/* ---------- Global counters ----------
+   CounterAPI: الزوار يوميًّا، والذكر تراكمي عالميًا.
+   If it is unavailable, the site falls back to local storage.
+*/
+const COUNTER_BASE = 'https://api.counterapi.dev/v1/abdelrahim-sadaqa';
+const localKeys = {visits:'localVisits', dhikr:'localDhikr'};
+
+function fmt(n){ return Number(n||0).toLocaleString('ar-EG'); }
+function todayKey(){
+ const d=new Date();
+ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function dailyVisitCounterName(){ return `visits-${todayKey()}`; }
+
+async function counterUp(name){
+ try{
+   const r=await fetch(`${COUNTER_BASE}/${name}/up`,{cache:'no-store'});
+   if(!r.ok) throw new Error('counter');
+   const j=await r.json();
+   return Number(j?.data ?? j?.count ?? 0);
+ }catch(e){
+   const k=localKeys[name];
+   const n=(Number(localStorage.getItem(k)||0)+1);
+   localStorage.setItem(k,n); return n;
+ }
+}
+async function counterGet(name){
+ try{
+   const r=await fetch(`${COUNTER_BASE}/${name}`,{cache:'no-store'});
+   if(!r.ok) throw new Error('counter');
+   const j=await r.json();
+   return Number(j?.data ?? j?.count ?? 0);
+ }catch(e){return Number(localStorage.getItem(localKeys[name])||0);}
+}
+function setStat(id,n){document.getElementById(id).textContent=fmt(n);}
+
+(async function initCounters(){
+ const visitSessionKey = `countedVisit-${todayKey()}`;
+ if(!sessionStorage.getItem(visitSessionKey)){
+   sessionStorage.setItem(visitSessionKey,'1');
+   const n=await counterUp(dailyVisitCounterName()); setStat('visits',n);
+ }else setStat('visits',await counterGet(dailyVisitCounterName()));
+ setStat('dhikrTotal',await counterGet('dhikr'));
+})();
+
+async function registerDhikr(){
+ const n=await counterUp('dhikr'); setStat('dhikrTotal',n);
+}
+
+/* ---------- Adhkar ---------- */
+const azkar = {
+ morning:[
+  {id:75,t:1,title:'آية الكرسي',text:'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ.',benefit:'من قالها حين يصبح حُفظ بها حتى يمسي.',source:'حصن المسلم 75 — البقرة 255'},
+  {id:76,t:3,title:'الإخلاص والفلق والناس',text:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ.',benefit:'تُقال ثلاث مرات صباحًا ومساءً، وهي من أذكار التحصين.',source:'حصن المسلم 76 — الإخلاص والفلق والناس'},
+  {id:77,t:1,title:'أصبحنا وأصبح الملك لله',text:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.',benefit:'دعاء جامع لخير اليوم والاستعاذة من شره.',source:'حصن المسلم 77'},
+  {id:78,t:1,title:'اللهم بك أصبحنا',text:'اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.',benefit:'ذكر يربط بداية اليوم بالله وتوحيده والرجوع إليه.',source:'حصن المسلم 78'},
+  {id:79,t:1,title:'سيد الاستغفار',text:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.',benefit:'من قاله موقنًا به ومات في يومه كان من أهل الجنة.',source:'حصن المسلم 79 — البخاري'},
+  {id:80,t:4,title:'اللهم إني أصبحت أشهدك',text:'اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.',benefit:'ورد في فضله أن من قاله أربع مرات أُعتق من النار.',source:'حصن المسلم 80'},
+  {id:81,t:1,title:'اللهم ما أصبح بي من نعمة',text:'اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ، فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.',benefit:'من أذكار شكر النعمة، وورد أنه أداء لشكر نعمة ذلك اليوم.',source:'حصن المسلم 81'},
+  {id:82,t:3,title:'اللهم عافني في بدني',text:'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.',benefit:'سؤال للعافية في البدن والسمع والبصر والاستعاذة من الفقر وعذاب القبر.',source:'حصن المسلم 82'},
+  {id:83,t:7,title:'حسبي الله لا إله إلا هو',text:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.',benefit:'ورد في فضله قول حصن المسلم: من قاله سبع مرات كفاه الله ما أهمه.',source:'حصن المسلم 83'},
+  {id:84,t:1,title:'اللهم إني أسألك العفو والعافية',text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.',benefit:'دعاء جامع للعفو والعافية والحفظ من الجهات كلها.',source:'حصن المسلم 84'},
+  {id:85,t:1,title:'اللهم عالم الغيب والشهادة',text:'اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ.',benefit:'استعاذة من شر النفس والشيطان ومن إيذاء المسلم.',source:'حصن المسلم 85'},
+  {id:86,t:3,title:'بسم الله الذي لا يضر مع اسمه شيء',text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.',benefit:'ورد أنه من قاله ثلاثًا صباحًا لم تصبه فجأة بلاء حتى يمسي، ومثله في المساء حتى يصبح.',source:'حصن المسلم 86'},
+  {id:87,t:3,title:'رضيت بالله ربًا',text:'رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ نَبِيًّا.',benefit:'ورد في فضله أن من قاله ثلاثًا كان له وعد بالرضا يوم القيامة.',source:'حصن المسلم 87'},
+  {id:88,t:1,title:'يا حي يا قيوم برحمتك أستغيث',text:'يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.',benefit:'دعاء للاستغاثة بالله وطلب إصلاح جميع الشأن.',source:'حصن المسلم 88'},
+  {id:89,t:1,title:'أصبحنا وأصبح الملك لله رب العالمين',text:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ: فَتْحَهُ وَنَصْرَهُ وَنُورَهُ وَبَرَكَتَهُ وَهُدَاهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ.',benefit:'سؤال خير اليوم ونصره ونوره وبركته وهداه والاستعاذة من شره.',source:'حصن المسلم 89'},
+  {id:90,t:1,title:'أصبحنا على فطرة الإسلام',text:'أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.',benefit:'تجديد لمعاني التوحيد والاتباع والفطرة.',source:'حصن المسلم 90'},
+  {id:91,t:100,title:'سبحان الله وبحمده',text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.',benefit:'مائة مرة صباحًا ومساءً؛ وورد أنه لا يسبقه أحد يوم القيامة إلا من زاد عليه.',source:'حصن المسلم 91 — البخاري'},
+  {id:92,t:10,title:'لا إله إلا الله وحده لا شريك له',text:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.',benefit:'ورد في فضله كتابة حسنات ومحو سيئات والتحصين من الشيطان عند قوله عشر مرات.',source:'حصن المسلم 92'},
+  {id:93,t:100,title:'لا إله إلا الله وحده لا شريك له — 100 مرة',text:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.',benefit:'مائة مرة في اليوم؛ ورد في فضلها أجر عظيم وكتابة حسنات ومحو سيئات والتحصين من الشيطان.',source:'حصن المسلم 93 — البخاري ومسلم'},
+  {id:94,t:3,title:'سبحان الله وبحمده عدد خلقه',text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.',benefit:'ثلاث مرات صباحًا؛ ذكر عظيم في معناه وكثرة ما يشتمل عليه من التسبيح.',source:'حصن المسلم 94 — مسلم'},
+  {id:95,t:1,title:'اللهم إني أسألك علمًا نافعًا',text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.',benefit:'دعاء جامع للعلم النافع والرزق الطيب والعمل المقبول.',source:'حصن المسلم 95'},
+  {id:96,t:100,title:'أستغفر الله وأتوب إليه',text:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.',benefit:'ورد أن النبي ﷺ كان يستغفر ويتوب إلى الله مائة مرة في اليوم.',source:'حصن المسلم 96 — البخاري ومسلم'},
+  {id:98,t:10,title:'اللهم صل وسلم على نبينا محمد ﷺ',text:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ.',benefit:'من الصلاة على النبي ﷺ، وقد ورد في فضله نصوص كثيرة.',source:'حصن المسلم 98'}
+ ],
+ evening:[
+  {id:75,t:1,title:'آية الكرسي',text:'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ.',benefit:'من أذكار المساء، وحصن المسلم يذكر فضل الحفظ بها.',source:'حصن المسلم 75 — البقرة 255'},
+  {id:76,t:3,title:'الإخلاص والفلق والناس',text:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ. بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ.',benefit:'تُقال ثلاث مرات صباحًا ومساءً، وهي من أذكار التحصين.',source:'حصن المسلم 76'},
+  {id:77,t:1,title:'أمسينا وأمسى الملك لله',text:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.',benefit:'دعاء جامع لخير الليل وما بعده والاستعاذة من شره.',source:'حصن المسلم 77'},
+  {id:78,t:1,title:'اللهم بك أمسينا',text:'اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ.',benefit:'ذكر يربط المساء بالله والحياة والموت والرجوع إليه.',source:'حصن المسلم 78'},
+  {id:79,t:1,title:'سيد الاستغفار',text:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.',benefit:'من قاله موقنًا به ومات في ليلته كان من أهل الجنة.',source:'حصن المسلم 79 — البخاري'},
+  {id:80,t:4,title:'اللهم إني أمسيت أشهدك',text:'اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.',benefit:'ورد في فضله أن من قاله أربع مرات أُعتق من النار.',source:'حصن المسلم 80'},
+  {id:81,t:1,title:'اللهم ما أمسى بي من نعمة',text:'اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ، فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.',benefit:'ذكر لشكر نعم الله في المساء.',source:'حصن المسلم 81'},
+  {id:82,t:3,title:'اللهم عافني في بدني',text:'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.',benefit:'سؤال للعافية والاستعاذة من الفقر وعذاب القبر.',source:'حصن المسلم 82'},
+  {id:83,t:7,title:'حسبي الله لا إله إلا هو',text:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.',benefit:'ورد في فضله: من قاله سبع مرات كفاه الله ما أهمه.',source:'حصن المسلم 83'},
+  {id:84,t:1,title:'اللهم إني أسألك العفو والعافية',text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.',benefit:'دعاء جامع للعفو والعافية والحفظ.',source:'حصن المسلم 84'},
+  {id:85,t:1,title:'اللهم عالم الغيب والشهادة',text:'اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ.',benefit:'استعاذة من شر النفس والشيطان ومن إيذاء المسلمين.',source:'حصن المسلم 85'},
+  {id:86,t:3,title:'بسم الله الذي لا يضر مع اسمه شيء',text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.',benefit:'ورد أنه من قاله ثلاثًا مساءً لم تصبه فجأة بلاء حتى يصبح.',source:'حصن المسلم 86'},
+  {id:87,t:3,title:'رضيت بالله ربًا',text:'رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ نَبِيًّا.',benefit:'ورد في فضله وعد بالرضا يوم القيامة لمن قاله ثلاثًا صباحًا أو مساءً.',source:'حصن المسلم 87'},
+  {id:88,t:1,title:'يا حي يا قيوم برحمتك أستغيث',text:'يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.',benefit:'دعاء للاستغاثة بالله وطلب إصلاح الشأن كله.',source:'حصن المسلم 88'},
+  {id:89,t:1,title:'أمسينا وأمسى الملك لله رب العالمين',text:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذِهِ اللَّيْلَةِ: فَتْحَهَا وَنَصْرَهَا وَنُورَهَا وَبَرَكَتَهَا وَهُدَاهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهَا وَشَرِّ مَا بَعْدَهَا.',benefit:'سؤال خير الليل ونوره وبركته وهداه.',source:'حصن المسلم 89'},
+  {id:90,t:1,title:'أمسينا على فطرة الإسلام',text:'أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.',benefit:'تجديد لمعاني التوحيد والإخلاص والاتباع.',source:'حصن المسلم 90'},
+  {id:91,t:100,title:'سبحان الله وبحمده',text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.',benefit:'مائة مرة صباحًا ومساءً؛ وورد في فضلها أنها من أعظم الأذكار.',source:'حصن المسلم 91 — البخاري'},
+  {id:92,t:10,title:'لا إله إلا الله وحده لا شريك له',text:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.',benefit:'ورد في فضل العشر منها حسنات ومحو سيئات والتحصين من الشيطان.',source:'حصن المسلم 92'},
+  {id:94,t:3,title:'سبحان الله وبحمده عدد خلقه',text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.',benefit:'ثلاث مرات في الصباح، وهو ذكر عظيم في قدره ومعناه.',source:'حصن المسلم 94 — مسلم'},
+  {id:97,t:3,title:'أعوذ بكلمات الله التامات',text:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.',benefit:'ثلاث مرات مساءً؛ ورد في فضله الحماية من أذى بعض المخلوقات.',source:'حصن المسلم 97'},
+  {id:98,t:10,title:'اللهم صل وسلم على نبينا محمد ﷺ',text:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ.',benefit:'من الصلاة على النبي ﷺ، وهي من أفضل الأذكار.',source:'حصن المسلم 98'}
+ ]
+};
+
+let currentPeriod='morning';
+const progress={morning:{},evening:{}};
+
+function renderAzkar(){
+ const list=document.getElementById('azkarList'); list.innerHTML='';
+ azkar[currentPeriod].forEach((z,i)=>{
+   const done=progress[currentPeriod][z.id]||0;
+   const card=document.createElement('article'); card.className='zekr';
+   card.innerHTML=`
+    <div class="zekr-head"><div class="zekr-title">${i+1}. ${z.title}</div><div class="repeat">العدد: ${z.t}</div></div>
+    <div class="zekr-text">${z.text}</div>
+    <div class="benefit"> <b>الفضل باختصار:</b> ${z.benefit}</div>
+    <div class="zekr-bottom">
+      <div class="zekr-count">أتممت <b class="doneCount">${Math.min(done,z.t)}</b> من ${z.t}</div>
+      <button class="zekr-btn ${done>=z.t?'done':''}">${done>=z.t?'تم بحمد الله':'سبّحت 1'}</button>
+    </div>
+    <div class="zekr-source">${z.source}</div>`;
+   const btn=card.querySelector('.zekr-btn'), dc=card.querySelector('.doneCount');
+   btn.addEventListener('click',async()=>{
+     let n=(progress[currentPeriod][z.id]||0)+1;
+     if(n>z.t){ n=0; showToast('أُعيد العداد لهذا الذكر'); }
+     progress[currentPeriod][z.id]=n;
+     dc.textContent=Math.min(n,z.t);
+     btn.classList.toggle('done',n>=z.t);
+     btn.textContent=n>=z.t?'تم بحمد الله':'سبّحت 1';
+     await registerDhikr();
+   });
+   list.appendChild(card);
+ });
+}
+document.getElementById('morningTab').onclick=()=>{currentPeriod='morning';morningTab.classList.add('active');eveningTab.classList.remove('active');renderAzkar()}
+document.getElementById('eveningTab').onclick=()=>{currentPeriod='evening';eveningTab.classList.add('active');morningTab.classList.remove('active');renderAzkar()}
+renderAzkar();
+
+/* ---------- Tasbeeh ---------- */
+const tasbeehPhrases=[
+ 'سبحان الله',
+ 'الحمد لله',
+ 'لا إله إلا الله',
+ 'الله أكبر',
+ 'لا حول ولا قوة إلا بالله',
+ 'أستغفر الله',
+ 'اللهم صل على سيدنا محمد'
+];
+const tasGrid=document.getElementById('tasGrid');
+tasbeehPhrases.forEach((phrase,i)=>{
+ const key='tas_'+i;
+ const card=document.createElement('div');
+ card.className='tas-card panel';
+ card.innerHTML=`<div class="tas-name">${phrase}</div><div class="tas-num" id="tasNum${i}">0</div><button class="tas-ring" type="button" aria-label="التسبيح: ${phrase}"><span class="tas-center">اضغط للذكر</span></button><button class="reset" type="button">تصفير هذا العداد</button>`;
+ const num=card.querySelector('.tas-num');
+ const ring=card.querySelector('.tas-ring');
+ const reset=card.querySelector('.reset');
+ function load(){num.textContent=fmt(localStorage.getItem(key)||0)}
+ ring.addEventListener('click',async()=>{
+   const n=Number(localStorage.getItem(key)||0)+1;
+   localStorage.setItem(key,String(n));
+   num.textContent=fmt(n);
+   await registerDhikr();
+ });
+ reset.addEventListener('click',()=>{localStorage.setItem(key,'0');load()});
+ load();
+ tasGrid.appendChild(card);
+});
+
+/* ---------- Quran ---------- */
+const surahs=[
+['الفاتحة','',7],['البقرة','',286],['آل عمران','',200],['النساء','',176],['المائدة','',120],
+['الأنعام','',165],['الأعراف','',206],['الأنفال','',75],['التوبة','',129],['يونس','',109],
+['هود','',123],['يوسف','',111],['الرعد','',43],['إبراهيم','',52],['الحجر','',99],['النحل','',128],
+['الإسراء','',111],['الكهف','',110],['مريم','',98],['طه','',135],['الأنبياء','',112],['الحج','',78],
+['المؤمنون','',118],['النور','',64],['الفرقان','',77],['الشعراء','',227],['النمل','',93],
+['القصص','',88],['العنكبوت','',69],['الروم','',60],['لقمان','',34],['السجدة','',30],['الأحزاب','',73],
+['سبأ','',54],['فاطر','',45],['يس','',83],['الصافات','',182],['ص','',88],['الزمر','',75],
+['غافر','',85],['فصلت','',54],['الشورى','',53],['الزخرف','',89],['الدخان','',59],['الجاثية','',37],
+['الأحقاف','',35],['محمد','',38],['الفتح','',29],['الحجرات','',18],['ق','',45],['الذاريات','',60],
+['الطور','',49],['النجم','',62],['القمر','',55],['الرحمن','',78],['الواقعة','',96],['الحديد','',29],
+['المجادلة','',22],['الحشر','',24],['الممتحنة','',13],['الصف','',14],['الجمعة','',11],
+['المنافقون','',11],['التغابن','',18],['الطلاق','',12],['التحريم','',12],['الملك','',30],
+['القلم','',52],['الحاقة','',52],['المعارج','',44],['نوح','',28],['الجن','',28],['المزمل','',20],
+['المدثر','',56],['القيامة','',40],['الإنسان','',31],['المرسلات','',50],['النبأ','',40],
+['النازعات','',46],['عبس','',42],['التكوير','',29],['الانفطار','',19],['المطففين','',36],
+['الانشقاق','',25],['البروج','',22],['الطارق','',17],['الأعلى','',19],['الغاشية','',26],
+['الفجر','',30],['البلد','',20],['الشمس','',15],['الليل','',21],['الضحى','',11],['الشرح','',8],
+['التين','',8],['العلق','',19],['القدر','',5],['البينة','',8],['الزلزلة','',8],['العاديات','',11],
+['القارعة','',11],['التكاثر','',8],['العصر','',3],['الهمزة','',9],['الفيل','',5],['قريش','',4],
+['الماعون','',7],['الكوثر','',3],['الكافرون','',6],['النصر','',3],['المسد','',5],['الإخلاص','',4],
+['الفلق','',5],['الناس','',6]
+];
+const sel=document.getElementById('surahSelect');
+surahs.forEach((s,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=`${i+1}. سورة ${s[0]}`;sel.appendChild(o)});
+async function fetchQuranEdition(n, edition){
+ const r=await fetch(`https://api.alquran.cloud/v1/surah/${n}/${edition}`, {cache:'no-store'});
+ if(!r.ok) throw new Error('API '+r.status);
+ const j=await r.json();
+ if(!j.data || !j.data.ayahs) throw new Error('No data');
+ return j.data;
+}
+async function loadSurah(){
+ const n=Number(sel.value), box=document.getElementById('mushaf');
+ box.innerHTML='<div class="quran-status"><span style="font-size:30px"></span><br>جاري فتح المصحف...</div>';
+ let d=null;
+ try { d=await fetchQuranEdition(n,'quran-uthmani-quran-academy'); }
+ catch(e1) {
+  try { d=await fetchQuranEdition(n,'quran-uthmani'); }
+  catch(e2) {
+   box.innerHTML=`<div class="quran-status">
+    <div style="font-size:42px;margin-bottom:10px"></div>
+    <b style="color:#6f4a2f">المصحف جاهز، لكن تعذر الاتصال بخدمة النص الآن.</b>
+    <br><br>
+    <a class="action" href="https://alquran.cloud/" target="_blank" rel="noopener">فتح المصحف الكامل</a>
+    <p style="margin-top:12px">عند نشر الموقع على GitHub Pages جرّبي تحديث الصفحة، وسيُحمّل النص تلقائيًا.</p>
+   </div>`;
+   return;
+  }
+ }
+ let out=`<div class="surah-title">سُورَةُ ${d.name.replace('سُورَةُ ','')}</div>`;
+ d.ayahs.forEach(a=>{out+=`<div class="ayah-q"><span class="ayah-num">${a.numberInSurah}</span>${a.text}</div>`});
+ box.innerHTML=out;
+ const audio=document.getElementById('quranAudio');
+ const padded=String(n).padStart(3,'0');
+ // Full-surah audio: stable Quran Audio Chapters mirror, with MP3Quran fallback.
+ audio.src=`https://github.com/The-Quran-Project/Quran-Audio-Chapters/raw/refs/heads/main/Data/${n}/${n}.mp3`;
+ audio.dataset.fallback=`https://server8.mp3quran.net/afs/${padded}.mp3`;
+ audio.dataset.surah=String(n);
+ audio.onerror=()=>{ if(audio.src!==audio.dataset.fallback) audio.src=audio.dataset.fallback; };
+}
+document.getElementById('loadSurah').onclick=loadSurah;
+document.getElementById('playSurah').onclick=async()=>{const audio=document.getElementById('quranAudio'); if(!audio.src || !audio.dataset.surah || audio.dataset.surah!==sel.value){await loadSurah()} audio.play().catch(()=>showToast('اضغط تشغيل من مشغل الصوت'))}
+sel.value='1';loadSurah();
+
+/* ---------- UI ---------- */
+function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>el.classList.remove('show'),1800)}
+const ids=['quran','adhkar','tasbeeh','radio','dua'];
+const links=[...document.querySelectorAll('.side-index a'),...document.querySelectorAll('.mobile-index a')];
+const observer=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-35% 0px -55% 0px'});
+ids.forEach(id=>{const e=document.getElementById(id);if(e)observer.observe(e)});
+
+/* Navigation: exactly one section at a time */
+const homeEl=document.getElementById('homeView');
+const appEl=document.getElementById('app');
+const drawerEl=document.getElementById('drawer');
+
+function openMenu(){drawerEl.classList.add('open');drawerEl.setAttribute('aria-hidden','false')}
+function closeMenu(){drawerEl.classList.remove('open');drawerEl.setAttribute('aria-hidden','true')}
+
+function showOnlyView(id){
+  homeEl.style.display='none';
+  appEl.classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>{
+    v.classList.remove('active');
+    v.style.display='none';
+  });
+  const target=document.getElementById(id);
+  if(target){
+    target.classList.add('active');
+    target.style.display='block';
+  }
+  closeMenu();
+  window.scrollTo(0,0);
+}
+
+document.getElementById('openMenu').onclick=openMenu;
+document.getElementById('openMenu2').onclick=openMenu;
+document.getElementById('closeMenu').onclick=closeMenu;
+
+drawerEl.addEventListener('click',e=>{
+ if(e.target===drawerEl)closeMenu();
+});
+document.querySelectorAll('.menu-item').forEach(btn=>{
+ btn.addEventListener('click',()=>showOnlyView(btn.dataset.view));
+});
+document.getElementById('backHome').onclick=()=>{
+ appEl.classList.remove('active');
+ document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});
+ homeEl.style.display='flex';
+ window.scrollTo(0,0);
+};
+
+</script>
+</body>
+</html>
